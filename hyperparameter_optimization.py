@@ -71,7 +71,7 @@ col_num = 3
 row_num = int(np.ceil(graph_draw_num / col_num))
 i = 0
 
-for key, val_acc_list in sorted(results_val.items(), key=lambda x:x[1][-1], reverse=True):
+for key, val_acc_list in sorted(results_val.items(), key=lambda x: x[1][-1], reverse=True):
     print("Best-" + str(i+1) + "(val acc:" + str(val_acc_list[-1]) + ") | " + key)
 
     plt.subplot(row_num, col_num, i+1)

@@ -22,7 +22,7 @@ size = 200
 
 # 超参数调整
 batch_size = 20
-learning_rate = 1e-4
+learning_rate = 1e-2
 epochs_num = 40
 train_step_num = 800
 val_step_num = 100
