@@ -11,11 +11,11 @@ from keras.models import load_model
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 import warnings
 warnings.simplefilter('ignore')
-import os
-os.environ['CUDA_VISIBLE_DEVICES'] =
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 
 class_number = 2
