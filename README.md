@@ -1,7 +1,9 @@
 # medical_images 机器学习大作业
 
 ## utils.py
-包含数据集建模和模型部分（build_model函数)，diseaseClassification_2class.py为可运行的实验程序。
+包含数据集建模（build_datasets函数）和模型部分（build_model函数)。
+## diseaseClassification_2class.py
+为可运行的实验程序。
 运行一次大概15-20分钟。
 ## hyperparameter_optimization.py
 为学习率learning_rate的预实验程序，方案为随机选取50个E-06到E-01的lr进行训练，最终输出val_acc最高的九组结果和对比图。
