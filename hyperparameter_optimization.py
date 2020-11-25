@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+# @Description  : history.history['accuracy']，版本不同，或为['acc']，val_acc同理
+# @Version      : 2.0
+# @Author       : 任洁
+# @Date         : 2020-11-25 10:41:36
+# @LastEditors  : 任洁
+# @LastEditTime : 2020-11-25 12:55:49
+# @FilePath     : /Desktop/medical_images/hyperparameter_optimization.py
+
 # 训练集中，随机挑选了一定比例作为验证集，测试集不动作为后续指标测试
 # 图片的文件夹需固定为现有状态才能读取图片进行训练和测试，直接运行.py文件即可，文件路径均需保持不变
  
@@ -27,14 +38,16 @@ epochs_num = 40
 train_step_num = 800
 val_step_num = 100
 
+
 # 设置lr随机实验次数
 optimization_trial = 50
 
-train_acc_list = []
-val_acc_list = []
 
 # 数据集加载
 train_generator, validation_generator, test_generator = build_datasets(size, batch_size)
+
+train_acc_list = []
+val_acc_list = []
 
 results_val = {}
 results_train = {}
@@ -43,11 +56,13 @@ results_train = {}
 for i in range(optimization_trial):
     # lr随机范围
     lr_test = 10 ** np.random.uniform(-6, -1)  # 随机选取lr，范围为1e-6到1e-1
-
+    # optimizer选择
+    optimizer_now = RMSprop(lr=lr_test)
+    
     print("进行到第 %d 次测试" % (i + 1))
 
     model = build_model(input_shape=(size, size, 3), classes=class_number)
-    model.compile(optimizer=RMSprop(lr=lr_test), loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=optimizer_now, loss='categorical_crossentropy', metrics=['accuracy'])
     history = model.fit_generator(train_generator, 
                               steps_per_epoch=int(train_step_num/batch_size), 
                               epochs=epochs_num,
@@ -71,6 +86,10 @@ col_num = 3
 row_num = int(np.ceil(graph_draw_num / col_num))
 i = 0
 
+
+# 画图
+plt.figure(1)
+
 for key, val_acc_list in sorted(results_val.items(), key=lambda x: x[1][-1], reverse=True):
     print("Best-" + str(i+1) + "(val acc:" + str(val_acc_list[-1]) + ") | " + key)
 
@@ -88,6 +107,5 @@ for key, val_acc_list in sorted(results_val.items(), key=lambda x: x[1][-1], rev
         break
 
 plt.show()
-plt.savefig('hyperparameter choose.png')
-
+plt.savefig('hyperparameter_choose.png')
 
