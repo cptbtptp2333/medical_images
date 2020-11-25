@@ -46,33 +46,7 @@ test_data = test_ds.repeat().batch(batch_size).prefetch(1)
 # (test_image, test_label) = test_data  # FIXME
 
 
-class ConvNet(Model):
-    def __init__(self):
-        super(ConvNet, self).__init__()
-        self.conv1 = layers.Conv2D(conv_filter1, kernel_size=50, activation=tf.nn.relu)
-        self.maxpool1 = layers.MaxPool2D(20, strides=20)
-        self.conv2 = layers.Conv2D(conv_filter2, kernel_size=30, activation=tf.nn.relu)
-        self.maxpool2 = layers.MaxPool2D(20, strides=20)
-        self.flatten = layers.Flatten()
 
-        self.fc1 = layers.Dense(fcl_units)
-        self.dropout = layers.Dropout(dropout_rate)
-        self.out = layers.Dense(num_classes)
-
-    def call(self, x, is_training=False):
-        x = tf.reshape(x, [-1, 1500, 1500, 3])
-        x = self.conv1(x)
-        x = self.maxpool1(x)
-        x = self.conv2(x)
-        x = self.maxpool2(x)
-        x = self.flatten(x)
-        x = self.fc1(x)
-        x = self.dropout(x, training=is_training)
-        x = self.out(x)
-
-        if not is_training:
-            x = tf.nn.softmax(x)
-        return x
 
 
 convnet = ConvNet()
