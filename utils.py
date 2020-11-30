@@ -90,7 +90,5 @@ def build_model(include_top=True, input_shape=(200, 200, 3), classes=2):
 
 
 if __name__ == '__main__':
-    size = 200
-    class_number = 2
-    model = build_model(input_shape=(size, size, 3), classes=class_number)
+    model = build_model()
     plot_model(model, './model.png', show_shapes=True)
