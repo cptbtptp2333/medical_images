@@ -13,6 +13,10 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras import layers
 from keras import models
 
+from keras.utils import plot_model
+from keras.models import load_model 
+import os
+# os.environ["PATH"] += os.pathsep + 'C:/anaconda3/Lib/site-packages/Graphviz 2.44.1/bin/' 
 
 train_dir = './TrainSet'
 validation_dir = './ValidationSet'
@@ -83,3 +87,10 @@ def build_model(include_top=True, input_shape=(200, 200, 3), classes=2):
     model.summary()
 
     return model
+
+
+if __name__ == '__main__':
+    size = 200
+    class_number = 2
+    model = build_model(input_shape=(size, size, 3), classes=class_number)
+    plot_model(model, './model.png', show_shapes=True)
