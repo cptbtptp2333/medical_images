@@ -63,7 +63,7 @@ plt.plot([0, 1], [0, 1], 'k--')
 auc_area = auc(fpr, tpr)  # 计算auc面积
 plt.plot(fpr, tpr, label='(AUC area = {:.3f})'.format(auc_area))
 
-# plt.xlabel('Sensitivity')#等价
+# plt.xlabel('Sensitivity')  # 等价
 # plt.ylabel('1-Specificity')
 plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
