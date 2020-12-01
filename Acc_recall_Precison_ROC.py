@@ -10,7 +10,6 @@
 # @FilePath     : /Desktop/medical_images/Acc_recall_Precison_ROC.py
 
 
-
 from sklearn.metrics import roc_curve, roc_auc_score
 from sklearn.metrics import auc
 import numpy as np
@@ -39,7 +38,7 @@ test_dir = './TestSet'
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 
-test_generator=test_datagen.flow_from_directory(
+test_generator = test_datagen.flow_from_directory(
             test_dir,
             target_size=(size,size),
             batch_size=batch_size,
