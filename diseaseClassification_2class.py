@@ -6,7 +6,7 @@
 # @Author       : 任洁
 # @Date         : 2020-11-25 10:41:36
 # @LastEditors  : 任洁
-# @LastEditTime : 2020-11-25 13:11:22
+# @LastEditTime : 2020-12-01 19:05:45
 # @FilePath     : /Desktop/medical_images/diseaseClassification_2class.py
 
 # 训练集中，随机挑选了一定比例作为验证集，测试集不动作为后续指标测试
@@ -73,7 +73,7 @@ plt.plot(epochs, acc, 'bo', label='Training acc')
 plt.plot(epochs, val_acc, 'b', label='Validation acc')
 plt.title('Training and validation accuracy')
 plt.legend()
-plt.savefig('TrainingandvalidationAccuracy6.jpg')
+plt.savefig('TrainingandvalidationAccuracy7.jpg')
 
 
 plt.figure(2)
@@ -83,10 +83,9 @@ plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Training and validation loss')
 plt.legend()
 plt.show()
-plt.savefig('TrainingandvalidationLoss6.jpg')
+plt.savefig('TrainingandvalidationLoss7.jpg')
 
 
 # 保存模型，保存模型权重
-# model.save('dn_2class40epoch1118.h5')
-# model.save_weights('dn_2class__weights40epoch1118.h5')
-
+model.save('dn_2class40epoch1201.h5')
+model.save_weights('dn_2class__weights40epoch1201.h5')

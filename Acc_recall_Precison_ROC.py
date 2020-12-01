@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+# @Description  : 
+# @Version      : 1.0
+# @Author       : 任洁
+# @Date         : 2020-11-23 15:06:41
+# @LastEditors  : 任洁
+# @LastEditTime : 2020-12-01 19:32:08
+# @FilePath     : /Desktop/medical_images/Acc_recall_Precison_ROC.py
+
 
 
 from sklearn.metrics import roc_curve,roc_auc_score
@@ -7,19 +18,31 @@ from sklearn.metrics import recall_score,accuracy_score
 from sklearn.metrics import precision_score,f1_score#计算各种指标的函数
 
 import matplotlib.pyplot as plt
+from keras.preprocessing.image import ImageDataGenerator
 
 from keras.models import load_model 
-model = load_model('dn_2class40epoch.h5')
+import os
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+
+model = load_model('dn_2class40epoch1201.h5')
 
 def onehot_labels(labels):#One-hot encoding the label
     return np.eye(2)[labels]
+
+class_number = 2
+size = 200
+batch_size = 20
+test_dir = './TestSet'
+
+test_datagen = ImageDataGenerator(rescale=1./255)
 
 test_generator=test_datagen.flow_from_directory(
             test_dir,
             target_size=(size,size),
             batch_size=batch_size,
             class_mode='categorical',
-            color_mode="grayscale",
+            color_mode="rgb",
             shuffle = False#很重要，按照文件顺序读取，保证标签与预测对应是同一张图片
             )
 
@@ -44,7 +67,7 @@ plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
 plt.title('ROC curve')
 plt.legend(loc='best')
-plt.savefig('ROC.jpg')
+plt.savefig('ROC1201.jpg')
 plt.show()    
 
 print("AUC area : ", auc_area)
